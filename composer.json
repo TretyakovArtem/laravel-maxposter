@@ -1,0 +1,19 @@
+{
+    "name": "pathfinder/laravel-maxposter",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Artem Tretyakov",
+            "email": "artem.tretyakov.91@inbox.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pathfinder\\LaravelMaxposter\\MaxposterServiceProvider"
+            ]
+        }
+    }
+}
