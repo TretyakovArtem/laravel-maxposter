@@ -1,6 +1,7 @@
 {
     "name": "pathfinder/laravel-maxposter",
     "license": "MIT",
+    "version": "0.1",
     "authors": [
         {
             "name": "Artem Tretyakov",
@@ -14,6 +15,11 @@
             "providers": [
                 "Pathfinder\\LaravelMaxposter\\MaxposterServiceProvider"
             ]
+        }
+    },
+    "autoload" : {
+        "psr-4": {
+            "Pathfinder\\LaravelMaxposter\\": ""
         }
     }
 }

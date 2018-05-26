@@ -1,6 +1,9 @@
 <?php
 
+namespace Pathfinder\LaravelMaxposter;
+
 use \GuzzleHttp\Client;
+use SimpleXMLElement;
 
 /**
  * Сервис для обработки данных с maxposter
@@ -22,11 +25,12 @@ class MaxposterService
 		$login    = env('MAXPOSTER_LOGIN', false);
 		$password = env('MAXPOSTER_PASSWORD', false);
 
-		$response = $client->get('http://www.server.com/endpoint', [
-		    'auth' => [
-		        'username' => $login, 
-		        'password' => $password
-		    ]
+
+		$response = $this->client->get('http://export1.maxposter.ru/'. env('MAXPOSTER_API_VER') . '/' . env('MAXPOSTER_USER_ID') . '/vehicles.xml?page_size=20&page=1', [
+		    'auth' => [$login, $password, 'basic']
 		]);
+
+		$xml = new SimpleXMLElement($response->getBody()->getContents());
+		dd($xml);
 	}
 }
