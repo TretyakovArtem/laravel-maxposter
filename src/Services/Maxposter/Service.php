@@ -8,7 +8,7 @@ use SimpleXMLElement;
 /**
  * Сервис для обработки данных с maxposter
  */
-class MaxposterService
+class Service
 {
 	public $cars;
 
