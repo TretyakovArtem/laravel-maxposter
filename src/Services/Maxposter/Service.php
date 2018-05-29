@@ -36,7 +36,8 @@ class Service
 
 	public function toCollect()
     {
-        $this->loadData();
+        $xml = $this->loadData();
+        dd($xml);
     }
 
 }
