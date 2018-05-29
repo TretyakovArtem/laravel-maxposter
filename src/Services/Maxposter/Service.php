@@ -1,6 +1,6 @@
 <?php
 
-namespace Pathfinder\LaravelMaxposter;
+namespace Pathfinder\LaravelMaxposter\Services\Maxposter;
 
 use \GuzzleHttp\Client;
 use SimpleXMLElement;
@@ -30,7 +30,13 @@ class Service
 		    'auth' => [$login, $password, 'basic']
 		]);
 
-		$xml = new SimpleXMLElement($response->getBody()->getContents());
-		dd($xml);
+		return new SimpleXMLElement($response->getBody()->getContents());
 	}
+
+
+	public function toCollect()
+    {
+        $this->loadData();
+    }
+
 }

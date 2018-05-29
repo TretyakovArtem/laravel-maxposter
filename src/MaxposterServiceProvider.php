@@ -23,6 +23,10 @@ class MaxposterServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->make('Pathfinder\LaravelMaxposter\Service');
+        $this->app->make('Pathfinder\LaravelMaxposter\Services\Maxposter');
+
+        $this->app->singleton('collect', function () {
+            return new \Collect();
+        });
     }
 }

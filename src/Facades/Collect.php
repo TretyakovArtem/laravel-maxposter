@@ -7,6 +7,6 @@ class Collect extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'Collect';
+        return 'collect';
     }
 }
