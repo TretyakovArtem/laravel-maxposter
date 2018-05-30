@@ -34,10 +34,30 @@ class Service
 	}
 
 
-	public function toCollect()
+	function xmlToArray ( $xmlObj, $output = array () )
+	{      
+	   foreach ( (array) $xmlObj as $index => $node )
+	   {
+	    $output[$index] = (is_object($node)) ? $this->xmlToArray($node): $node;
+	   }
+	  return $output;
+	}
+
+
+	function toCollect()
     {
+    	$cars = [];
         $xml = $this->loadData();
-        dd($xml);
+        foreach ($xml->vehicles as $vehicle) {
+        	foreach ($vehicle as $car) {
+        		$cars[] = $this->xmlToArray($car);
+        	}
+        }
+        $d = collect($cars);
+        dd($d);
+
+        return $cars;
     }
+
 
 }
