@@ -2,8 +2,9 @@
 
 namespace Pathfinder\LaravelMaxposter\Services\Maxposter;
 
-use \GuzzleHttp\Client;
 use SimpleXMLElement;
+use \GuzzleHttp\Client;
+use Pathfinder\LaravelMaxposter\Models\Vehicle;
 
 /**
  * Сервис для обработки данных с maxposter
@@ -36,10 +37,9 @@ class Service
 
 	function xmlToArray ( $xmlObj, $output = array () )
 	{      
-	   foreach ( (array) $xmlObj as $index => $node )
-	   {
-	    $output[$index] = (is_object($node)) ? $this->xmlToArray($node): $node;
-	   }
+	   foreach ( (array) $xmlObj as $index => $node ) {
+			$output[$index] = (is_object($node)) ? $this->xmlToArray($node): $node;
+		}
 	  return $output;
 	}
 
@@ -53,11 +53,11 @@ class Service
         		$cars[] = $this->xmlToArray($car);
         	}
         }
-        $d = collect($cars);
-        dd($d);
 
-        return $cars;
+		$vehicles = collect($cars)->each(function($element, $key){
+			return Vehicle::make($element);
+		});
+
+        return $vehicles;
     }
-
-
 }
