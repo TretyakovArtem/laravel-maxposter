@@ -6,9 +6,7 @@ use SimpleXMLElement;
 use \GuzzleHttp\Client;
 use Pathfinder\LaravelMaxposter\Models\Vehicle;
 
-/**
- * Сервис для обработки данных с maxposter
- */
+
 class Service
 {
 	public $cars;
@@ -20,21 +18,31 @@ class Service
 		$this->client = $client;
 	}
 
-
+	/**
+	 * Function for load data from maxposter server
+	 *
+	 * @return SimpleXMLElement
+	 */
 	public function loadData()
 	{
 		$login    = env('MAXPOSTER_LOGIN', false);
 		$password = env('MAXPOSTER_PASSWORD', false);
 
 
-		$response = $this->client->get('http://export1.maxposter.ru/'. env('MAXPOSTER_API_VER') . '/' . env('MAXPOSTER_USER_ID') . '/vehicles.xml?page_size=20&page=1', [
+		$response = $this->client->get('http://export1.maxposter.ru/'. env('MAXPOSTER_API_VER') . '/' . env('MAXPOSTER_LOGIN') . '/vehicles.xml?page_size=20&page=1', [
 		    'auth' => [$login, $password, 'basic']
 		]);
 
 		return new SimpleXMLElement($response->getBody()->getContents());
 	}
 
-
+	/**
+	 * Function for convert xml to array
+	 *
+	 * @param [type] $xmlObj
+	 * @param [type] $output
+	 * @return array
+	 */
 	function xmlToArray ( $xmlObj, $output = array () )
 	{      
 	   foreach ( (array) $xmlObj as $index => $node ) {
@@ -44,6 +52,11 @@ class Service
 	}
 
 
+	/**
+	 * Make collection of Vehicles from array
+	 *
+	 * @return Illuminate\Support\Collection
+	 */
 	function toCollect()
     {
     	$cars = [];
@@ -54,7 +67,6 @@ class Service
         	}
 		}
 		
-
 		$vehicles = collect($cars)->map(function($element, $key){
 			return Vehicle::make($element);
 		});
