@@ -52,9 +52,10 @@ class Service
         	foreach ($vehicle as $car) {
         		$cars[] = $this->xmlToArray($car);
         	}
-        }
+		}
+		
 
-		$vehicles = collect($cars)->each(function($element, $key){
+		$vehicles = collect($cars)->map(function($element, $key){
 			return Vehicle::make($element);
 		});
 
