@@ -9,8 +9,6 @@ use Pathfinder\LaravelMaxposter\Models\Vehicle;
 
 class Service
 {
-	public $cars;
-
 	private $client;
 	
 	function __construct(Client $client)
