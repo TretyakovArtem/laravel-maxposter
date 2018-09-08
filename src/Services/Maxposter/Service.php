@@ -41,7 +41,7 @@ class Service
 	 * @param [type] $output
 	 * @return array
 	 */
-	function xmlToArray ( $xmlObj, $output = array () )
+	public function xmlToArray ( $xmlObj, $output = array () )
 	{      
 	   foreach ( (array) $xmlObj as $index => $node ) {
 			$output[$index] = (is_object($node)) ? $this->xmlToArray($node): $node;
@@ -55,7 +55,7 @@ class Service
 	 *
 	 * @return Illuminate\Support\Collection
 	 */
-	function toCollect()
+	public function toCollect()
     {
     	$cars = [];
         $xml = $this->loadData();
